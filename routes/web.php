@@ -9,6 +9,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
+
 // Redirect root URL to login page
 Route::get('/', function () {
     return redirect('/login');
