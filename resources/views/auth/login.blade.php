@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right,rgb(216, 244, 248), #ffffff);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-control {
+            border-radius: 20px;
+        }
+        .btn-primary {
+            background: #667eea;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+        .login-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h3 class="login-title">Login</h3>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('login.submit') }}">
+            @csrf
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="{{ route('password.request') }}">Forgot Password?</a>
+        </div>
+    </div>
+</body>
+</html>
