@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
+
+
 // Redirect root URL to login page
 Route::get('/', function () {
     return redirect('/login');
@@ -37,11 +39,28 @@ Route::get('/feedback', function () {
 
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
-// Password Reset Routes
+// Password Reset Routes old
+//Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
+//Route::post('/forgot-password', [ForgotPasswordController::class, 'validateUser'])->name('password.validate');
+//Route::get('/reset-password/{user}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+//Route::post('/reset-password', [ForgotPasswordController::class, 'updatePassword'])->name('password.update');
+
+// Password Reset Routes New
+
+// Forgot Password Routes
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'validateUser'])->name('password.validate');
-Route::get('/reset-password/{user}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+
+// Reset Password Routes
+Route::get('/reset-password/{email}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset.form');
 Route::post('/reset-password', [ForgotPasswordController::class, 'updatePassword'])->name('password.update');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'updatePassword'])->name('password.update');
+
+
+
+
 
 // Dashboard Routes (Protected)
 Route::middleware(['auth'])->group(function () {

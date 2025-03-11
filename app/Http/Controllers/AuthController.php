@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         return back()->withErrors(['login_error' => 'Invalid username or password']);
     }
-
+/* Registration*/
     public function register(Request $request)
     {
         $request->validate([
@@ -43,14 +43,17 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        User::create([
+     /*  commeted for tesion admin login
+     
+     User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password), // Hashing password before storing
             'role' => 'user', // Default role
         ]);
-
+*/
         return redirect('/login')->with('success', 'Registration successful. Please log in.');
     }
+  
 
     public function logout()
     {

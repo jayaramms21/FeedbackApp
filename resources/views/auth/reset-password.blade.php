@@ -1,48 +1,51 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.app')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+@section('content')
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; background-color:rgb(255, 255, 255);"> <!-- Light Blue Background -->
+    <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="text-center text-danger mb-3">Reset Password</h2> <!-- Red Text -->
+        <p class="text-center text-primary"><em>Enter your new password.</em></p> <!-- Italic & Blue Text -->
+
+        <!-- Success Message -->
+        @if(session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('status') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        <!-- Error Messages -->
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
 
-            <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+            <input type="hidden" name="email" value="{{ request()->email }}">
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+            <div class="mb-3">
+                <label for="password" class="form-label text-danger">New Password</label> <!-- Red Label -->
+                <input type="password" id="password" name="password" class="form-control" required>
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+            <div class="mb-3">
+                <label for="password_confirmation" class="form-label text-danger">Confirm Password</label> <!-- Red Label -->
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
             </div>
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
-            </div>
+            <button type="submit" class="btn btn-warning w-100">Reset Password</button> <!-- Orange Button -->
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript for Dismissible Alerts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@endsection
