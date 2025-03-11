@@ -71,6 +71,8 @@ Route::middleware(['auth'])->group(function () {
 Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('admin.feedback');
-    Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('calculate.ratings');
+    Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('admin.calculate-ratings');
+
+ //   Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('calculate.ratings');
     Route::get('/ratings', [RatingController::class, 'showRatings'])->name('admin.ratings');
 });

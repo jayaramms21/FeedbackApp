@@ -13,8 +13,39 @@ class AuthController extends Controller
     {
         return view('auth.login'); // Ensure you have a view file: resources/views/auth/login.blade.php
     }
-
     public function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+    
+        $user = User::where('username', $request->username)->first();
+    
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                Auth::login($user);
+    
+                \Log::info('User logged in:', ['id' => $user->id, 'role' => $user->role]); // Debugging
+    
+                if ($user->role === 'admin') {
+                    return redirect('/admin/dashboard');
+                } else {
+                    return redirect('/user/dashboard');
+                }
+            } else {
+                \Log::error('Password mismatch for user:', ['username' => $request->username]);
+            }
+        } else {
+            \Log::error('User not found:', ['username' => $request->username]);
+        }
+    
+        return back()->withErrors(['login_error' => 'Invalid username or password']);
+    }
+    
+  /*  befor admin validate login 
+  
+  public function login(Request $request)
     {
         $request->validate([
             'username' => 'required',
@@ -35,6 +66,7 @@ class AuthController extends Controller
 
         return back()->withErrors(['login_error' => 'Invalid username or password']);
     }
+        */ 
 /* Registration*/
     public function register(Request $request)
     {
