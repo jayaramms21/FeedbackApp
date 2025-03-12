@@ -1,47 +1,48 @@
-<h1>Admin Dashboard</h1>
-
-<!-- Logout Form -->
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-<!--
-@extends('layouts.app')-->
-@extends('layouts.admin')  
-
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    
+<div class="container mt-4">
+    <h1>Admin Dashboard</h1>
 
-    <a href="{{ route('admin.feedback') }}" class="btn btn-primary">View Feedback</a>
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-end mb-3">
+      <!--  <a href="{{ route('admin.calculate-ratings') }}" class="btn btn-success me-2">Calculate Ratings</a>
+        <a href="{{ route('admin.ratings') }}" class="btn btn-secondary">View Ratings</a> -->
+    </div>
 
+    <!-- Recent Feedback -->
     <h3>Recent Feedback</h3>
     @if(isset($feedbacks) && $feedbacks->count() > 0)
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
                 <tr>
                     <th>Student Name</th>
-                    <th>Faculty Rating</th>
-                    <th>Course Rating</th>
+                    <th>Faculty Rating (Avg)</th>
+                    <th>Course Rating (Avg)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($feedbacks as $feedback)
                     <tr>
                         <td>{{ $feedback->user->name ?? 'Unknown' }}</td>
-                        <td>{{ json_encode($feedback->faculty_rating) }}</td>
-                        <td>{{ json_encode($feedback->course_rating) }}</td>
+                        <td>
+                            {{ is_array($feedback->faculty_rating) 
+                                ? round(collect($feedback->faculty_rating)->avg(), 2) 
+                                : round(collect(json_decode($feedback->faculty_rating, true))->avg(), 2) 
+                            }}
+                        </td>
+                        <td>
+                            {{ is_array($feedback->course_rating) 
+                                ? round(collect($feedback->course_rating)->avg(), 2) 
+                                : round(collect(json_decode($feedback->course_rating, true))->avg(), 2) 
+                            }}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @else
-        <p>No feedback available.</p>
+        <p class="text-muted">No feedback available.</p>
     @endif
 </div>
 @endsection
-
-<a href="{{ route('admin.calculate-ratings') }}" class="btn btn-success">Calculate Ratings</a>
-<a href="{{ route('admin.ratings') }}" class="btn btn-secondary">View Ratings</a>
-
-
