@@ -39,7 +39,7 @@
 
         .btn-primary { background-color: #007bff; }
         .btn-success { background-color: #28a745; }
-        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary { background-color:rgb(54, 146, 140); }
         .btn-danger { background-color: #dc3545; }
 
         .btn:hover {

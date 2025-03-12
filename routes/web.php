@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 
-
 // Redirect root URL to login page
 Route::get('/', function () {
     return redirect('/login');
@@ -75,4 +74,28 @@ Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
 
  //   Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('calculate.ratings');
     Route::get('/ratings', [RatingController::class, 'showRatings'])->name('admin.ratings');
+
+// new 
+Route::get('/students', [AdminController::class, 'students'])->name('admin.students');
+    Route::post('/students', [AdminController::class, 'storeStudent']);
+    
+    Route::get('/staff', [AdminController::class, 'staff'])->name('admin.staff');
+    Route::post('/admin/staff', [AdminController::class, 'storeStaff']);
+    
+    Route::get('/courses', [AdminController::class, 'courses'])->name('admin.courses');
+    Route::post('/courses', [AdminController::class, 'storeCourse']);
+    
+    Route::get('/batches', [AdminController::class, 'batches'])->name('admin.batches');
+    Route::post('/batches', [AdminController::class, 'storeBatch']);
+
+    Route::get('/update-user', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+    Route::post('/update-user', [AdminController::class, 'updateUserData']);
+
+
 });
+// new 
+
+//Route::middleware(['auth', 'admin'])->group(function () {
+  //  Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+//});

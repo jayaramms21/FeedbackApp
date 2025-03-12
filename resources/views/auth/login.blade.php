@@ -25,14 +25,14 @@
             border-radius: 20px;
         }
         .btn-primary {
-            background: #667eea;
+            background:rgb(23, 223, 110);
             border: none;
             border-radius: 20px;
             padding: 10px;
             width: 100%;
         }
         .btn-primary:hover {
-            background: #5a67d8;
+            background:rgb(221, 214, 87);
         }
         .login-title {
             text-align: center;
@@ -40,6 +40,7 @@
             margin-bottom: 1.5rem;
             color: #333;
         }
+       
     </style>
 </head> 
 <body>

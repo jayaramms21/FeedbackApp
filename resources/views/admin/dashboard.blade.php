@@ -1,6 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
+<!-- New Code -->
+
+<div class="container">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex gap-3 mb-4">
+        <a href="{{ route('admin.students') }}" class="btn btn-info">Student Details</a>
+        <a href="{{ route('admin.staff') }}" class="btn btn-warning">Staff Details</a>
+        <a href="{{ route('admin.courses') }}" class="btn btn-primary">Course Details</a>
+        <a href="{{ route('admin.batches') }}" class="btn btn-secondary">Batch Details</a>
+        <a href="{{ route('admin.updateUser') }}" class="btn btn-dark">Update User</a>
+    </div>
+</div>
+
 <div class="container mt-4">
     <h1>Admin Dashboard</h1>
 
