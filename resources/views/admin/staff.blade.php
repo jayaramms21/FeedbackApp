@@ -1,19 +1,33 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h2>Staff Details</h2>
-    <form action="{{ url('/admin/staff') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label>Employee Number</label>
-            <input type="number" name="emp_number" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label>Name</label>
-            <input type="text" name="emp_name" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-success">Save Staff</button>
-    </form>
-</div>
+    <div class="container">
+        <h2>Staff List</h2>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Emp Number</th>
+                    <th>Emp Name</th>
+                    <th>Flag</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($staffMembers as $staff)
+                <tr>
+                    <td>{{ $staff->emp_number }}</td>
+                    <td>{{ $staff->emp_name }}</td>
+                    <td>{{ $staff->flag }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <!-- Back Button (Optional at Bottom) -->
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary mt-3">Back to Admin</a>
+    </div>
 @endsection

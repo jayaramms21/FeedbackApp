@@ -2,18 +2,45 @@
 
 @section('content')
 <div class="container">
-    <h2>Batch Details</h2>
-    <form action="{{ url('/admin/batches') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label>Batch Number</label>
-            <input type="number" name="bno" class="form-control" required>
+    <h2>Batch List</h2>
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        <div class="mb-3">
-            <label>Course ID</label>
-            <input type="text" name="courseId" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-success">Save Batch</button>
-    </form>
+    @endif
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Batch No</th>
+                <th>Interview Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Coordinator</th>
+                <th>Timings</th>
+                <th>Students</th>
+                <th>Course Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($batches as $batch)
+            <tr>
+                <td>{{ $batch->courseId }}</td>
+                <td>{{ $batch->courseName }}</td>
+                <td>{{ $batch->bno }}</td>
+                <td>{{ $batch->interdt }}</td>
+                <td>{{ $batch->strtdt }}</td>
+                <td>{{ $batch->enddt }}</td>
+                <td>{{ $batch->coordinator }}</td>
+                <td>{{ $batch->tm }}</td>
+                <td>{{ $batch->numst }}</td>
+                <td>{{ $batch->courseFee }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection

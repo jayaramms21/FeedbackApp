@@ -71,13 +71,19 @@ Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('admin.feedback');
     Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('admin.calculate-ratings');
+   
+   // Route::post('/storeStudent', [AdminController::class, 'storeStudent'])->name('admin.storeStudent');
+    Route::get('/viewStudents', [AdminController::class, 'viewStudents'])->name('admin.viewStudents');
+    Route::get('/staff', [AdminController::class, 'staff'])->name('admin.staff');
+    Route::get('/batches', [AdminController::class, 'batches'])->name('admin.batches');
+    Route::get('/courses', [AdminController::class, 'courses'])->name('admin.courses');
 
  //   Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('calculate.ratings');
     Route::get('/ratings', [RatingController::class, 'showRatings'])->name('admin.ratings');
 
 // new 
 Route::get('/students', [AdminController::class, 'students'])->name('admin.students');
-    Route::post('/students', [AdminController::class, 'storeStudent']);
+    Route::post('/students', [AdminController::class, 'storeStudent'])->name('admin.storeStudent');
     
     Route::get('/staff', [AdminController::class, 'staff'])->name('admin.staff');
     Route::post('/admin/staff', [AdminController::class, 'storeStaff']);

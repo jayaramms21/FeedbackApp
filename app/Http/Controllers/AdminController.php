@@ -21,6 +21,8 @@ use App\Models\Staff;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\User;
+use App\Models\StaffTp;
+//use App\Models\Batch;
 class AdminController extends Controller
 {
     public function dashboard()
@@ -30,19 +32,71 @@ class AdminController extends Controller
 
         return view('admin.dashboard', compact('feedbacks'));
     }
-    public function storeStudent(Request $request) {
-        Student::updateOrCreate(['regno' => $request->regno], $request->all());
-        User::updateOrCreate(['username' => $request->stname], ['password' => bcrypt($request->regno), 'role' => 'user']);
-        return redirect()->route('admin.students')->with('success', 'Student saved successfully!');
-    }
+    public function storeStudent(Request $request)
+{
+    $request->validate([
+        'regno' => 'required|unique:student,regno',
+        'stname' => 'required',
+        'emailid' => 'required|email',
+    ]);
+
+    \DB::table('student')->insert([
+        'regno' => $request->regno,
+        'stname' => $request->stname,
+        'emailid' => $request->emailid,
+        'sex' => $request->sex,
+        'dob' => $request->dob,
+        'guardian' => $request->guardian,
+        'conum' => $request->conum,
+        'courseName' => $request->courseName,
+        'bno' => $request->bno,
+        'strtdt' => $request->strtdt,
+        'grnstatus' => $request->grnstatus,
+        'tm' => $request->tm,
+        'rollNo' => $request->rollNo,
+        'remark' => $request->remark,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return redirect()->back()->with('success', 'Student details saved successfully!');
+}
+
+    
+    
+    
+    public function students()
+{
+    $students = Student::all(); // Fetch all students
+    return view('admin.students', compact('students'));
+}
+public function viewStudents()
+{
+    $students = \DB::table('student')->get();
+    return view('admin.view_students', compact('students'));
+}
+public function staff()
+{
+    $staffMembers = StaffTp::all(); // Fetch all staff from the database
+    return view('admin.staff', compact('staffMembers')); // Pass data to the view
+}
     
     public function storeStaff(Request $request) {
         Staff::updateOrCreate(['emp_number' => $request->emp_number], $request->all());
         return redirect()->route('admin.staff')->with('success', 'Staff saved successfully!');
     }
     
-    public function storeCourse(Request $request) {
-        Course::updateOrCreate(['courseId' => $request->courseId], $request->all());
+    public function Courses(Request $request) {
+        $request->validate([
+            'courseId' => 'required',
+            'courseName' => 'required'
+        ]);
+    
+        Course::updateOrCreate(
+            ['courseId' => $request->courseId],
+            ['courseName' => $request->courseName]
+        );
+    
         return redirect()->route('admin.courses')->with('success', 'Course saved successfully!');
     }
     
@@ -55,4 +109,13 @@ class AdminController extends Controller
         User::updateOrCreate(['username' => $request->username], ['password' => bcrypt($request->password)]);
         return redirect()->route('admin.updateUser')->with('success', 'User updated successfully!');
     }
+ 
+
+public function batches()
+{
+    $batches = Batch::all(); // Fetch all batches using the model
+    return view('admin.batches', compact('batches'));
+}
+
+
 }
