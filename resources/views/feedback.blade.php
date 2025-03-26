@@ -4,17 +4,21 @@
 <div class="container py-5">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-warning fw-bold display-4" style="font-family: 'Georgia', serif;">📋 Feedback Rating</h2>
+        <h3 class="text-warning fw-bold display-4" style="font-family: 'Georgia', serif;">📋 Feedback Rating</h3>
+    </div>
 
-        <!-- Logout Button -->
-        <div class="d-flex justify-content-end">
-    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger px-4 py-2 fw-bold shadow-sm" 
-            style="border-radius: 8px; transition: 0.3s; font-size: 1.2rem;">
-            🚪 Logout
-        </button>
-    </form>
+    <!-- Move Logout Button to the Top Right -->
+    <div class="d-flex justify-content-end mb-3">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger px-4 py-2 fw-bold shadow-sm" 
+                style="border-radius: 8px; transition: 0.3s; font-size: 1.2rem;">
+                🚪 Logout
+            </button>
+        </form>
+    </div>
+
+    <!-- Remaining Content Below -->
 </div>
 
 

@@ -84,19 +84,39 @@
             <label for="module" class="form-label">Select Module:</label>
             <select class="form-select" id="module">
                 <option value="">-- Choose Module --</option>
-                <option value="Module 1">Module 1</option>
-                <option value="Module 2">Module 2</option>
-                <option value="Module 3">Module 3</option>
+                <option value="Logic Building & Problem Solving">Logic Building & Problem Solving</option>
+    <option value="C++ Programming">C++ Programming</option>
+    <option value="Concepts of Operating Systems & Software Development Methodologies">
+        Concepts of Operating Systems & Software Development Methodologies
+    </option>
+    <option value="Object Oriented Programming with Java">Object Oriented Programming with Java</option>
+    <option value="Algorithms & Data Structures Using Java">Algorithms & Data Structures Using Java</option>
+    <option value="Database Technologies">Database Technologies</option>
+    <option value="Web Programming Technologies">Web Programming Technologies</option>
+    <option value="Web-based Java Programming">Web-based Java Programming</option>
+    <option value="MS.Net Technologies">MS.Net Technologies</option>
+    <option value="General Aptitude">General Aptitude</option>
+    <option value="Effective Comm.">Effective Comm.</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="topic" class="form-label">Select Topic:</label>
             <select class="form-select" id="topic">
-                <option value="">-- Choose Topic --</option>
-                <option value="Topic A">Topic A</option>
-                <option value="Topic B">Topic B</option>
-                <option value="Topic C">Topic C</option>
+            <option value="">-- Choose Topi --</option>
+                <<option value="Logic Building & Problem Solving">Logic Building & Problem Solving</option>
+    <option value="C++ Programming">C++ Programming</option>
+    <option value="Concepts of Operating Systems & Software Development Methodologies">
+        Concepts of Operating Systems & Software Development Methodologies
+    </option>
+    <option value="Object Oriented Programming with Java">Object Oriented Programming with Java</option>
+    <option value="Algorithms & Data Structures Using Java">Algorithms & Data Structures Using Java</option>
+    <option value="Database Technologies">Database Technologies</option>
+    <option value="Web Programming Technologies">Web Programming Technologies</option>
+    <option value="Web-based Java Programming">Web-based Java Programming</option>
+    <option value="MS.Net Technologies">MS.Net Technologies</option>
+    <option value="General Aptitude">General Aptitude</option>
+    <option value="Effective Comm.">Effective Comm.</option>
             </select>
         </div>
 

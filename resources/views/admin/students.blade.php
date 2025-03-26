@@ -6,10 +6,11 @@
 
     <!-- Success Message -->
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 
     <form action="{{ route('admin.storeStudent') }}" method="POST">
         @csrf

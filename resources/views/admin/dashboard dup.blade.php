@@ -16,12 +16,7 @@
         <a href="{{ route('admin.courses') }}" class="btn btn-primary">Course Details</a>
 
         <a href="{{ route('admin.batches') }}" class="btn btn-secondary">Batch Details</a>
-       <a href="{{ route('admin.updateUser') }}" class="btn btn-dark">Update User</a>
-     
-       
-        
-
-        <a href="{{ route('admin.facultyMapping') }}" class="btn btn-info">Faculty Mapping</a> <!-- Added Faculty Mapping Link -->
+        <a href="{{ route('admin.updateUser') }}" class="btn btn-dark">Update User</a>
     </div>
 </div>
 

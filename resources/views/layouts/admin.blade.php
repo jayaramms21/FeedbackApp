@@ -16,10 +16,16 @@
             border-radius: 5px;
         }
         
-        .admin-header h2 {
+        /*.admin-header h2 {
             color: white;
             margin: 0;
-        }
+        }*/
+        .admin-header h2 a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Ensure text remains white */
+    margin: 0;
+}
+
 
         /* Button Styling */
         .admin-buttons {
@@ -51,8 +57,9 @@
 
     <!-- Admin Panel Header -->
     <div class="admin-header">
-        <h2>Admin Dashboard</h2>
-        
+    <!--    <h2>Admin Dashboard</h2> -->
+        <h2><a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark">Admin Dashboard</a></h2>
+       
         <div class="admin-buttons">
             <a href="{{ route('admin.feedback') }}" class="btn btn-primary">View Feedback</a>
             <a href="{{ route('admin.calculate-ratings') }}" class="btn btn-success">Calculate Ratings</a>

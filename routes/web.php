@@ -8,7 +8,9 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FacultyMappingController;
+use App\Http\Controllers\StaffController;
 
 
 // Redirect root URL to login page
@@ -67,16 +69,66 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Admin Routes with Prefix (Protected)
-Route::prefix('admin')->middleware(['auth.admin'])->group(function () {
+// temporary disacble *****************************
+//Route::prefix('admin')->middleware(['auth.admin'])->group(function ()
+Route::prefix('admin')->group(function () 
+{
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('admin.feedback');
     Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('admin.calculate-ratings');
    
    // Route::post('/storeStudent', [AdminController::class, 'storeStudent'])->name('admin.storeStudent');
     Route::get('/viewStudents', [AdminController::class, 'viewStudents'])->name('admin.viewStudents');
-    Route::get('/staff', [AdminController::class, 'staff'])->name('admin.staff');
+    
+   // Route::get('/staff', [AdminController::class, 'staff'])->name('admin.staff');
+   Route::get('/staff', [StaffController::class, 'index'])->name('admin.staff');
+   Route::post('/staff/store', [StaffController::class, 'store'])->name('admin.staff.store');
+   
+
+
     Route::get('/batches', [AdminController::class, 'batches'])->name('admin.batches');
-    Route::get('/courses', [AdminController::class, 'courses'])->name('admin.courses');
+    
+
+    Route::get('/courses', [CourseController::class, 'index'])->name('admin.courses');
+    Route::post('/courses/store', [CourseController::class, 'store'])->name('admin.courses.store');
+    Route::get('/courses/view', [CourseController::class, 'view'])->name('admin.courses.view');
+    
+    
+    Route::get('/faculty-mapping', [FacultyMappingController::class, 'index'])->name('admin.facultyMapping');
+
+// Store faculty mapping data
+//Route::post('/faculty-mapping/store', [FacultyMappingController::class, 'store'])->name('admin.facultyMapping.store');
+Route::post('/faculty-mapping/store', [FacultyMappingController::class, 'store'])->name('admin.facultyMapping.store');
+
+    
+//*****************.....UPDATE USER......************************/
+//Route::get('/admin/update-user', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+//Route::get('/admin/add-student-user/{regno}', [AdminController::class, 'addStudentAsUser'])->name('admin.addStudentAsUser');
+
+Route::get('/update-user', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+Route::get('/add-student-user/{regno}', [AdminController::class, 'addStudentAsUser'])->name('admin.addStudentAsUser');
+//Route::get('/add-student-user/{regno}', [AdminController::class, 'showStudentUserForm'])->name('admin.addStudentUser');
+//Route::get('/student-user/{regno}', [AdminController::class, 'showStudentUserForm'])->name('admin.showStudentUserForm');
+
+//Route::post('/store-student-user', [AdminController::class, 'storeStudentAsUser'])->name('admin.storeStudentAsUser');
+//Route::get('/update-user/{regno}', [AdminController::class, 'showStudentUserForm'])
+  //  ->name('admin.showStudentUserForm');
+
+// Show Student User Form (with admin prefix)/*
+//Route::get('/update-user/{regno}', [AdminController::class, 'showStudentUserForm'])->name('admin.showStudentUserForm');
+
+// Store Student User
+//Route::post('/store-student-user', [AdminController::class, 'storeStudentAsUser'])->name('admin.storeStudentAsUser');
+
+
+
+    // Route::get('/courses', [AdminController::class, 'courses'])->name('admin.courses');
+    // Route::post('/courses', [AdminController::class, 'storeCourse'])->name('admin.courses.store');
+    
+
+
+
+  //  Route::get('/courses', [AdminController::class, 'courses'])->name('admin.courses');
 
  //   Route::get('/calculate-ratings', [RatingController::class, 'calculateRatings'])->name('calculate.ratings');
     Route::get('/ratings', [RatingController::class, 'showRatings'])->name('admin.ratings');
@@ -96,6 +148,13 @@ Route::get('/students', [AdminController::class, 'students'])->name('admin.stude
 
     Route::get('/update-user', [AdminController::class, 'updateUser'])->name('admin.updateUser');
     Route::post('/update-user', [AdminController::class, 'updateUserData']);
+
+    // fac -mapping 
+    
+
+//Route::get('/admin/faculty-mapping', [FacultyMappingController::class, 'index'])->name('admin.facultyMapping');
+//Route::post('/faculty-mapping/store', [FacultyMappingController::class, 'store'])->name('facultyMapping.store');
+
 
 
 });
